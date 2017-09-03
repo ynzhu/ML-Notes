@@ -17,13 +17,25 @@ import pandas as pd
 Matrix of features, aka, matrix of independent variables
 
 ##3. When missing data in datasets
-Usually, use mean value of the column of the missing data
+Usually, use mean value of the column of the missing data  
+  
+### Here are some templates for further use
 - with python
 ```
-method
+from sklearn.preprocessing import Imputer
+imputer = Imputer(missing_values = 'NaN', strategy='mean', axis=0)
+imputer = imputer.fit(x[:,1:3])
+x[:,1:3] = imputer.transform(x[:,1:3])
 ```
 - with R
 ```
-method
+dataset$Age = ifelse(is.na(dataset$Age),
+                     ave(dataset$Age, FUN = function(x) mean(x, na.rm = TRUE)), 
+                     dataset$Age)
+dataset$Salary = ifelse(is.na(dataset$Salary),
+                     ave(dataset$Salary, FUN = function(x) mean(x, na.rm = TRUE)), 
+                     dataset$Salary)
 ```
-##4. 
+## 4. Encode categorical data
+
+
